@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .courier-card { background: #000 !important; border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 20px; padding: 30px; color: white; }
+    .order-row { background: rgba(255, 255, 255, 0.05); border-radius: 12px; margin-bottom: 20px; padding: 25px; border-left: 5px solid #ffd700; }
+    .item-name { color: #ffd700; font-weight: bold; font-size: 1.3rem; }
+    
+    /* ღილაკების სტილები */
+    .btn-status { border: none; font-weight: bold; border-radius: 8px; padding: 8px 15px; transition: 0.3s; color: #000; }
+    .btn-delivered { background: #28a745; color: white; } /* მწვანე */
+    .btn-cancelled { background: #dc3545; color: white; } /* წითელი */
+    .btn-delayed { background: #ffc107; color: black; }   /* ყვითელი */
+    .btn-status:hover { opacity: 0.8; transform: translateY(-2px); }
+</style>
+
+<div class="courier-card mt-4 shadow-lg">
+    <h2 class="fw-bold mb-4 text-center" style="color: #ffd700;">ჩემი სამუშაო პანელი</h2>
+
+    {% if orders %}
+        {% for o in orders %}
+        <div class="order-row shadow">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <div class="item-name">{{ o.item_name }}</div>
+                    <div class="text-white-50 mt-1"><i class="fas fa-map-marker-alt me-2"></i>{{ o.address }}</div>
+                </div>
+                <div class="text-end">
+                    <div class="small text-white-50 mb-1">მიმდინარე სტატუსი:</div>
+                    <span class="badge border border-warning px-3 py-2">{{ o.status }}</span>
+                </div>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="{{ url_for('update_order_status', id=o.id, status='delivered') }}" class="btn-status btn-delivered">
+                    <i class="fas fa-check me-1"></i> მიტანილია
+                </a>
+                <a href="{{ url_for('update_order_status', id=o.id, status='delayed') }}" class="btn-status btn-delayed">
+                    <i class="fas fa-clock me-1"></i> გადადება
+                </a>
+                <a href="{{ url_for('update_order_status', id=o.id, status='cancelled') }}" class="btn-status btn-cancelled">
+                    <i class="fas fa-times me-1"></i> გაუქმება
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center py-5">
+            <p class="text-white-50">ამჟამად აქტიური შეკვეთები არ გაქვს.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

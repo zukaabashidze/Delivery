@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold accent-text">დაგვიკავშირდით</h2>
+        <p class="text-white-50">მოგვწერეთ ნებისმიერ საკითხზე</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 glass-card p-4 p-md-5">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="თქვენი სახელი" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="თქვენი Gmail" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="subject" class="form-control" placeholder="თემა" required>
+                </div>
+                <div class="mb-4">
+                    <textarea name="message" class="form-control" rows="5" placeholder="შეტყობინება..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-premium w-100 py-3 fw-bold">გაგზავნა</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

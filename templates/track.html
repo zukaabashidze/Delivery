@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="premium-card p-4 shadow-lg" style="background: #000; border: 1px solid #ffd700; border-radius: 20px;">
+                <h3 class="text-center mb-4" style="color: #ffd700;">📦 შეკვეთის თრექინგი</h3>
+                
+                <form method="POST">
+                    <div class="mb-3">
+                        <input type="text" name="order_id" class="form-control" 
+                               placeholder="შეიყვანეთ შეკვეთის ID (მაგ: 105)" 
+                               style="background: #111; color: #fff; border: 1px solid #ffd700;" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold" style="background: #ffd700;">ძებნა</button>
+                </form>
+
+                {% if order %}
+                <div class="mt-4 p-3" style="border-top: 1px solid rgba(255,215,0,0.3);">
+                    <h5 style="color: #ffd700;">შეკვეთის დეტალები:</h5>
+                    <p style="color: #fff;"><strong>ნივთი:</strong> {{ order.item_name }}</p>
+                    <p style="color: #fff;"><strong>სტატუსი:</strong> 
+                        <span class="badge bg-dark border border-warning">{{ order.status }}</span>
+                    </p>
+                    <p style="color: #fff;"><strong>მისამართი:</strong> {{ order.city }}, {{ order.address }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .about-section {
+        background: #000000;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        font-family: 'Inter', 'Montserrat', sans-serif;
+    }
+
+    .bg-blur-spot {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.12;
+        z-index: 1;
+    }
+
+    .premium-card {
+        background: rgba(15, 15, 15, 0.6);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        border-radius: 20px;
+        padding: 45px;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        position: relative;
+        z-index: 10;
+    }
+
+    .premium-card:hover {
+        transform: translateY(-12px);
+        border-color: #d4af37;
+        box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1);
+        background: rgba(20, 20, 20, 0.8);
+    }
+
+    .accent-gold {
+        background: linear-gradient(135deg, #d4af37 0%, #f1e0a9 50%, #b8972f 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    .stat-number {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #d4af37;
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        display: inline-block;
+        color: #d4af37;
+    }
+
+    .cta-button {
+        background: transparent;
+        border: 1px solid #d4af37;
+        color: #d4af37 !important;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background: #d4af37;
+        color: #000000 !important;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    }
+</style>
+
+<div class="about-section d-flex align-items-center py-5">
+    
+    <div class="bg-blur-spot" style="width: 600px; height: 600px; top: -15%; right: -10%; background: #d4af37;"></div>
+    <div class="bg-blur-spot" style="width: 500px; height: 500px; bottom: -10%; left: -5%; background: #1a1a2e;"></div>
+
+    <div class="container position-relative" style="z-index: 10;">
+        
+        <div class="text-center mb-5">
+            <h1 class="display-2 accent-gold mb-3" style="letter-spacing: 8px;">ZUKA DELIVERY</h1>
+            <p class="h5 fw-light text-white-50" style="letter-spacing: 4px; text-transform: uppercase;">The Art of Logistics</p>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-9 text-center">
+                <p class="lead" style="font-size: 1.3rem; line-height: 2; font-weight: 300; color: rgba(255,255,255,0.9);">
+                    ჩვენ შევცვალეთ მიწოდების აღქმა. <span class="accent-gold">ZUKA Delivery</span> არ არის მხოლოდ სერვისი — ეს არის პუნქტუალურობისა და უსაფრთხოების გარანტია. 
+                    ჩვენი პლატფორმა შექმნილია მათთვის, ვინც არ აკეთებს კომპრომისს ხარისხზე. 
+                    თითოეული ამანათი ჩვენთვის უნიკალური გზავნილია, რომელსაც განსაკუთრებული ზრუნვა სჭირდება.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="premium-card">
+                    <i class="fas fa-gem feature-icon"></i>
+                    <h3 class="h4 mb-3 accent-gold">პრემიუმ სტანდარტი</h3>
+                    <p class="text-white-50 fw-light">თითოეული კურიერი გადის სპეციალურ მომზადებას, რათა თქვენმა მომხმარებელმა მიიღოს უმაღლესი დონის მომსახურება.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="premium-card">
+                    <i class="fas fa-clock feature-icon"></i>
+                    <h3 class="h4 mb-3 accent-gold">დროის ფასი</h3>
+                    <p class="text-white-50 fw-light">ჩვენი სისტემა ოპტიმიზებულია წამებში. ჩვენ ვიცით, რომ დრო ყველაზე ძვირფასი რესურსია, ამიტომ არასდროს ვაგვიანებთ.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="premium-card">
+                    <i class="fas fa-fingerprint feature-icon"></i>
+                    <h3 class="h4 mb-3 accent-gold">ინდივიდუალიზმი</h3>
+                    <p class="text-white-50 fw-light">ჩვენ ვპოულობთ გადაწყვეტას ნებისმიერი სირთულის ამოცანისთვის. თქვენი ბიზნესის საჭიროებები ჩვენი პრიორიტეტია.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-5 text-center border-top border-bottom" style="border-color: rgba(212, 175, 55, 0.1) !important;">
+            <div class="col-md-3 col-6">
+                <div class="stat-number">100%</div>
+                <p class="small text-white-50 text-uppercase tracking-widest">უსაფრთხოება</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-number">24/7</div>
+                <p class="small text-white-50 text-uppercase tracking-widest">კონტროლი</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-number">FAST</div>
+                <p class="small text-white-50 text-uppercase tracking-widest">მიწოდება</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-number">LUX</div>
+                <p class="small text-white-50 text-uppercase tracking-widest">სერვისი</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ url_for('register') }}" class="cta-button btn">დაიწყე თანამშრომლობა</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

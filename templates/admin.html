@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .admin-card { background: #000 !important; border-radius: 20px; padding: 30px; border: 1px solid rgba(255,215,0,0.1); margin-bottom: 30px; }
+    .stats-card { background: linear-gradient(45deg, #000, #111); border: 1px solid #ffd700; border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 30px; }
+    .custom-table { background-color: #000 !important; color: #fff !important; width: 100%; border-collapse: separate; border-spacing: 0 5px; }
+    .custom-table td, .custom-table th { padding: 15px !important; border-bottom: 1px solid rgba(255,215,0,0.1) !important; background: transparent !important; color: #fff !important; }
+    .custom-table thead th { color: #ffd700 !important; border-bottom: 2px solid #ffd700 !important; text-transform: uppercase; font-size: 0.8rem; }
+    .admin-input { background: #111 !important; border: 1px solid #ffd700 !important; color: #fff !important; border-radius: 8px; padding: 10px; }
+    .admin-input::placeholder { color: rgba(255,255,255,0.5); }
+    .section-title { color: #ffd700; border-left: 4px solid #ffd700; padding-left: 15px; margin-bottom: 25px; font-weight: bold; }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="stats-card shadow">
+                <h6 style="color: #ffd700; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;">ჯამური შეკვეთები</h6>
+                <h2 style="color: #fff; font-weight: bold;">{{ total_orders }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-card shadow-lg">
+        <h4 class="section-title">შემოსული CV-ები (კურიერობის მსურველები)</h4>
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th>სახელი</th>
+                        <th>ტელეფონი</th>
+                        <th>მდებარეობა</th>
+                        <th>სტატუსი</th>
+                        <th>მოქმედება</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in apps %}
+                    <tr>
+                        <td class="fw-bold" style="color: #ffd700 !important;">{{ a.name }}</td>
+                        <td>{{ a.phone }}</td>
+                        <td>{{ a.location }}</td>
+                        <td>
+                            <span class="badge {% if a.status == 'დადასტურებულია' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                                {{ a.status }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if a.status != 'დადასტურებულია' %}
+                            <div class="d-flex gap-2">
+                                <a href="{{ url_for('approve_courier', id=a.id) }}" class="btn btn-sm btn-warning fw-bold" style="background: #ffd700; color: #000;">
+                                    <i class="fas fa-check"></i> დამტკიცება
+                                </a>
+                                <a href="{{ url_for('delete_application', id=a.id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('ნამდვილად გინდა უარყოფა?')">
+                                    <i class="fas fa-times"></i> უარყოფა
+                                </a>
+                            </div>
+                            {% else %}
+                            <span style="color: #28a745;"><i class="fas fa-check-circle"></i> უკვე კურიერია</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="admin-card shadow-lg">
+        <h4 class="section-title">ახალი ნივთის დამატება</h4>
+        <form action="{{ url_for('create_order') }}" method="POST" class="row g-3">
+            <div class="col-md-3">
+                <input type="text" name="item_name" class="form-control admin-input" placeholder="ნივთის დასახელება" required>
+            </div>
+            <div class="col-md-2">
+                <select name="city" class="form-select admin-input" required>
+                    <option value="" disabled selected>ქალაქი</option>
+                    <option value="თბილისი">თბილისი</option>
+                    <option value="რუსთავი">რუსთავი</option>
+                    <option value="ბათუმი">ბათუმი</option>
+                    <option value="ქუთაისი">ქუთაისი</option>
+                    <option value="სხვა">სხვა</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="address" class="form-control admin-input" placeholder="ზუსტი მისამართი" required>
+            </div>
+            <div class="col-md-1">
+                <input type="number" name="price" step="0.1" class="form-control admin-input" placeholder="₾" required>
+            </div>
+            <div class="col-md-2">
+                <select name="courier_id" class="form-select admin-input" required>
+                    <option value="" disabled selected>კურიერი</option>
+                    {% for c in couriers %}
+                    <option value="{{ c.id }}">{{ c.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-12 text-end">
+                <button type="submit" class="btn btn-warning fw-bold px-4" style="background: #ffd700; color: #000;">
+                    <i class="fas fa-plus"></i> შეკვეთის გაფორმება
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="admin-card shadow-lg">
+        <h4 class="section-title">აქტიური შეკვეთები</h4>
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th>ნივთი</th>
+                        <th>ქალაქი / მისამართი</th>
+                        <th>კურიერი</th>
+                        <th>ფასი</th>
+                        <th>სტატუსი</th>
+                        <th>მოქმედება</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in orders %}
+                    <tr>
+                        <td style="color: #ffd700 !important; font-weight: bold;">{{ o.item_name }}</td>
+                        <td><strong>{{ o.city }}</strong>, {{ o.address }}</td>
+                        <td><i class="fas fa-user-motorcycle me-2"></i>{{ o.courier.username }}</td>
+                        <td><span class="text-warning">{{ o.price }}₾</span></td>
+                        <td><span class="badge bg-dark border border-warning">{{ o.status }}</span></td>
+                        <td>
+                            <a href="{{ url_for('delete_order', id=o.id) }}" 
+                               class="btn btn-sm btn-outline-danger" 
+                               onclick="return confirm('ნამდვილად გინდა შეკვეთის წაშლა?')">
+                                <i class="fas fa-trash"></i> ამოშლა
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

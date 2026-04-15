@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .form-control {
+        background: rgba(255, 255, 255, 0.05) !important; 
+        border: 1px solid rgba(255, 215, 0, 0.2) !important;
+        color: #ffffff !important;
+        transition: 0.3s all ease;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: #ffd700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+        outline: none;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 glass-card p-5 shadow-lg">
+        <h2 class="accent-text text-center fw-bold mb-4" style="color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">
+            კურიერის განაცხადი
+        </h2>
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" name="name" placeholder="სრული სახელი" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="pid" placeholder="პირადი ნომერი (11 ნიშნა)" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" name="age" placeholder="ასაკი" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="phone" placeholder="ტელეფონის ნომერი" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="location" placeholder="მისამართი/ქალაქი" class="form-control" required>
+            </div>
+            <button class="btn btn-premium w-100 fw-bold py-2 mt-2" style="background: linear-gradient(45deg, #ffd700, #b8860b); color: #000; border: none; border-radius: 8px;">
+                განაცხადის გაგზავნა
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4 glass-card mt-5">
+        <h3 class="text-center mb-4 fw-bold">ავტორიზაცია</h3>
+        <form method="POST">
+            <input type="text" name="username" class="form-control mb-3" placeholder="მომხმარებლის სახელი" required>
+            <input type="password" name="password" class="form-control mb-3" placeholder="პაროლი" required>
+            <button class="btn btn-premium w-100">შესვლა</button>
+            <p class="text-center mt-3 small">არ გაქვს პროფილი? <a href="/register" class="accent-text">დარეგისტრირდი</a></p>
+        </form>
+        <a href="/forgot-password" class="text-white-50 small d-block mt-2">დაგავიწყდა პაროლი?</a>
+    </div>
+</div>
+{% endblock %}

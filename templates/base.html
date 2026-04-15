@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivero.ge</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #ffc107;
+            --gold-light: #ffdb4d;
+            --dark-bg: #03050a;
+            --nav-bg: rgba(5, 8, 16, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --premium-blue: #007bff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: #1a1e26; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+        body {
+            background-color: var(--dark-bg) !important;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 193, 7, 0.05) 0%, transparent 40%);
+            color: white !important;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .custom-navbar {
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .navbar-brand {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover { transform: scale(1.05); }
+
+        .accent-text {
+            color: var(--gold) !important;
+            text-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-weight: 500;
+            margin: 0 12px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link-custom::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-link-custom:hover { color: var(--gold) !important; }
+        .nav-link-custom:hover::after { width: 100%; }
+
+        .glass-card, .card {
+            background: var(--card-bg) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 24px !important;
+            padding: 25px;
+            transition: var(--transition);
+            color: white;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-color: rgba(255, 193, 7, 0.3) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+
+        .btn-register-gold {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 50%, #ffc107 100%) !important;
+            background-size: 200% auto !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            border: none !important;
+            border-radius: 14px !important;
+            padding: 10px 28px !important;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+            transition: var(--transition) !important;
+        }
+
+        .btn-register-gold:hover {
+            background-position: right center !important;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%) !important;
+            color: white !important;
+            font-weight: 600 !important;
+            border: none !important;
+            border-radius: 14px !important;
+            padding: 10px 28px !important;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+
+        .btn-outline-light {
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 14px !important;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .btn-outline-light:hover {
+            background: white !important;
+            color: black !important;
+            transform: translateY(-2px);
+        }
+
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 12px !important;
+            color: white !important;
+            padding: 12px 15px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2) !important;
+            border-color: var(--gold) !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .form-control::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+        .alert {
+            animation: slideIn 0.5s ease-out;
+            border-radius: 16px;
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top custom-navbar navbar-dark">
+    <div class="container">
+        <a class="navbar-brand text-white fw-bold" href="/">
+            DELIVERY <span class="accent-text">PRO</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="ms-auto d-flex align-items-center">
+                <a class="nav-link nav-link-custom" href="/">მთავარი</a>
+                <a class="nav-link nav-link-custom" href="/apply">ვაკანსია</a>
+                <a class="nav-link nav-link-custom" href="/contact">კონტაქტი</a>
+                <a class="nav-link nav-link-custom" href="{{ url_for('about') }}">ჩვენს შესახებ</a>
+                <a class="nav-link nav-link-custom" href="{{ url_for('track_order') }}">თრექინგი</a>
+
+                <div class="ms-lg-4 d-flex align-items-center mt-3 mt-lg-0">
+                    {% if current_user.is_authenticated %}
+                        <div class="me-3 d-none d-md-block text-end">
+                            <small class="text-white-50 d-block" style="font-size: 0.7rem;">ავტორიზებული</small>
+                            <span class="accent-text fw-bold">{{ current_user.username }}</span>
+                        </div>
+                        <a class="btn btn-premium btn-sm px-4" href="/dashboard">პანელი</a>
+                        <a class="btn btn-outline-light btn-sm ms-2" href="/logout">გასვლა</a>
+                    {% else %}
+                        <a class="btn btn-register-gold btn-sm me-2 px-4" href="/register">რეგისტრაცია</a>
+                        <a class="btn btn-premium btn-sm px-4" href="/login">შესვლა</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 pb-5">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-dismissible fade show mb-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+</div>
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

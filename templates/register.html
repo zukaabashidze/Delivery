@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4 glass-card mt-5">
+        <h3 class="text-center mb-4 fw-bold">რეგისტრაცია</h3>
+        <form method="POST">
+            <input type="text" name="username" class="form-control mb-3" placeholder="ჩაწერეთ თქვენი სახელი" required>
+
+            <div class="position-relative">
+                <input type="password" id="password" name="password" class="form-control mb-3" placeholder="ჩაწერეთ პაროლი" required>
+                
+                <span onclick="togglePassword()" 
+                      style="position:absolute; right:10px; top:10px; cursor:pointer;">
+                    👁️
+                </span>
+            </div>
+
+            <button class="btn btn-premium w-100">რეგისტრაცია</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    var pass = document.getElementById("password");
+    if (pass.type === "password") {
+        pass.type = "text";
+    } else {
+        pass.type = "password";
+    }
+}
+</script>
+
+{% endblock %}
